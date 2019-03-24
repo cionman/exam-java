@@ -1,10 +1,9 @@
-package com.base.console.apachecommons;
+package com.base.console.utillibrary;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Test;
-import org.mockito.internal.util.io.IOUtil;
 
 import java.io.*;
 
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertNotSame;
 public class ApacheCommonsTest {
 
     @Test
-    public void 문자열_HTML_형식으로_변형(){
+    public void 문자열_HTML_형식으로_변형() {
         final String exampleText = "Left & Right";
         final String escapedString = StringEscapeUtils.escapeHtml4(exampleText);
         assertEquals("Left &amp; Right", escapedString);
@@ -34,7 +33,7 @@ public class ApacheCommonsTest {
 
     @Test
     public void InputStream객체를_String_객체로_변환하기() throws IOException {
-        String exampleText =  "An example String";
+        String exampleText = "An example String";
         final InputStream inputStream = new ByteArrayInputStream(exampleText.getBytes());
         final String consumedString = IOUtils.toString(inputStream, "UTF-8");
 
@@ -43,7 +42,7 @@ public class ApacheCommonsTest {
 
     @Test
     public void OutputStream_객체_나누기() throws IOException {
-        String exampleText =  "예제 데이터";
+        String exampleText = "예제 데이터";
         final InputStream inputStream = IOUtils.toInputStream(exampleText, "UTF-8");
         final File tempFile = File.createTempFile("example", "txt");
         tempFile.deleteOnExit();
@@ -54,7 +53,7 @@ public class ApacheCommonsTest {
         IOUtils.copy(inputStream, tee);
 
         final FileInputStream fis = new FileInputStream(tempFile);
-        final String stream1Contents = IOUtils.toString(fis,"UTF-8");
+        final String stream1Contents = IOUtils.toString(fis, "UTF-8");
         final String stream2Contents = outputStream2.toString();
 
         assertEquals(exampleText, stream1Contents);
